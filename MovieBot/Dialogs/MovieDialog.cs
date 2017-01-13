@@ -17,10 +17,10 @@ namespace MovieBot.Dialogs
     {
         public FilmType FilmType { get; set; }
         public string Search { get; set; }
-        [Optional()]
-        [Template(TemplateUsage.NoPreference, "1")]
-        public int? Page { get; set; }
-        public bool HasMorePages { get; set; }
+        //[Optional()]
+        //[Template(TemplateUsage.NoPreference, "1")]
+        //public int? Page { get; set; }
+        //public bool HasMorePages { get; set; }
 
         public static IForm<MovieDialog> BuildForm()
         {
@@ -40,7 +40,7 @@ namespace MovieBot.Dialogs
                     message.Attachments = new List<Attachment>();
                 }
 
-                foreach (var movie in movies["Search"])
+                foreach (var movie in movies["Search"].OrderByDescending(x => x.Value<string>("Year")))
                 {
                     var images = new List<CardImage>();
                     
@@ -49,8 +49,8 @@ namespace MovieBot.Dialogs
                     var buttons = new List<CardAction>();
                     buttons.Add(new CardAction()
                     {
-                        Value = "http://www.imdb.com//title/" + movie.Value<string>("imdbID") + "/?ref_=fn_tt_tt_1",
-                        Type = "openUrl",
+                        Value = "https://www.imdb.com//title/" + movie.Value<string>("imdbID"),
+                        Type =  "openUrl",
                         Title = "IMDB Page"
                     });
 
@@ -62,6 +62,7 @@ namespace MovieBot.Dialogs
                     };
 
                     message.Attachments.Add(card.ToAttachment());
+                    message.AttachmentLayout = AttachmentLayoutTypes.Carousel;
                 }
 
                 await context.PostAsync(message);
