@@ -9,7 +9,7 @@ using System.Web;
 
 namespace MovieBot.Dialogs
 {
-    public enum FilmType { None, Movie, Series, Episode, Game }
+    public enum FilmType { None, Movie, Series, Game }
     public enum YesNo { None, Yes, No }
 
     [Serializable]
@@ -17,10 +17,6 @@ namespace MovieBot.Dialogs
     {
         public FilmType FilmType { get; set; }
         public string Search { get; set; }
-        //[Optional()]
-        //[Template(TemplateUsage.NoPreference, "1")]
-        //public int? Page { get; set; }
-        //public bool HasMorePages { get; set; }
 
         public static IForm<MovieDialog> BuildForm()
         {
@@ -69,7 +65,6 @@ namespace MovieBot.Dialogs
             };
 
             return new FormBuilder<MovieDialog>()
-                .Message("Welcome to the IMDB bot. Now, you can start to search a movie, serie, episode or game.")                
                 .OnCompletion(processSearch)
                 .Build();
         }
