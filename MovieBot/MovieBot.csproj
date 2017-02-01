@@ -24,6 +24,7 @@
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
     <ApplicationInsightsResourceId>/subscriptions/28b01fda-097c-4246-a0c8-1e1cfc302723/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/MovieBot</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/28b01fda-097c-4246-a0c8-1e1cfc302723/resourceGroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/MovieBot</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -228,6 +229,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\MovieDialog.cs" />
+    <Compile Include="Dialogs\RootDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -31,7 +31,7 @@ namespace MovieBot
                 //// return our reply to the user
                 //Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
                 //await connector.Conversations.ReplyToActivityAsync(reply);
-                await Conversation.SendAsync(activity, MakeRootDialog);
+                await Conversation.SendAsync(activity, () => new RootDialog());
             }
             else
             {
@@ -39,11 +39,6 @@ namespace MovieBot
             }
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
-        }
-
-        private IDialog<MovieDialog> MakeRootDialog()
-        {
-            return Chain.From(() => FormDialog.FromForm(MovieDialog.BuildForm));
         }
 
         private Activity HandleSystemMessage(Activity message)

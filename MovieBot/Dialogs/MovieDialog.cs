@@ -6,16 +6,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
+using Microsoft.Bot.Builder.FormFlow.Advanced;
 
 namespace MovieBot.Dialogs
 {
     public enum FilmType { None, Movie, Series, Game }
     public enum YesNo { None, Yes, No }
 
+
     [Serializable]
     public class MovieDialog
     {
         public FilmType FilmType { get; set; }
+
         public string Search { get; set; }
 
         public static IForm<MovieDialog> BuildForm()
@@ -65,6 +68,8 @@ namespace MovieBot.Dialogs
             };
 
             return new FormBuilder<MovieDialog>()
+                //.Field(nameof(FilmType))
+                .Field(nameof(Search))
                 .OnCompletion(processSearch)
                 .Build();
         }
